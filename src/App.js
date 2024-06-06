@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/navbar';
+import Home from './views/Home';
+import Report from './views/Report';
+import ReportComponent from './components/ReportComponent/title';
+import '/node_modules/primeflex/primeflex.css'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+      <Router>
+      <div>
+        <Navbar /> {/* Add Navbar component */}
+        <Routes>
+          <Route path="/" element={<Home />} /> {/* Home route */}
+          {Report.map((route, index) => (
+            <Route key={index} path={route.path} element={<ReportComponent label = {route.label}><route.component /></ReportComponent>} />
+          ))}
+        </Routes>
+      </div>
+    </Router>
+    );
 }
 
 export default App;

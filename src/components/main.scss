@@ -1,0 +1,22 @@
+#menu-navbar {
+    font-weight: bold;
+}
+
+#menu-navbar span {
+    color: black;
+}
+#menu-navbar .p-menuitem-text:hover {
+    display: block;
+    color: #fff;
+}
+
+.p-menuitem-content:hover {
+    background-color: #999999;
+}
+
+#menu-items {
+    font-weight: lighter;
+}
+.p-icon .p-submenu-icon {
+    display: none;
+}
