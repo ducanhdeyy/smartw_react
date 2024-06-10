@@ -2,25 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { InputMask } from 'primereact/inputmask';
 import { Button } from 'primereact/button';
-
-//axios api
 import axios from 'axios';
 
 export default function YearComponent() {
     const [selectedCity, setSelectedCity] = useState(null);
-    const [value, setValue] = useState(null);
-
-    //api
+    const [year, setYear] = useState('');
     const [cities, setCities] = useState([]);
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+        const years = parseInt(value, 10);
+        
+        // Kiểm tra năm hợp lệ
+        if (value.length === 4 && (years >= 1900 && years <= 2099)) {
+            setYear(value);
+        } else if (value.length < 4 || isNaN(year)) {
+            setYear(value);
+        }
+    };
 
-    //get api axios
+    const handleSearch = () => {
+        console.log("Selected city:", selectedCity);
+        console.log("Year:", year);
+    };
+
     useEffect(() => {
-        // Fetch cities data from the API
-        axios
-            .get('')
+        const apiUrl = 'https://esgoo.net/api-tinhthanh/1/0.htm';
+
+        axios.get(apiUrl)
             .then((response) => {
-                setCities(response.data);
+                console.log('API response:', response.data);
+
+                // Kiểm tra phản hồi từ API và đặt dữ liệu vào state
+                if (response.data.error === 0 && Array.isArray(response.data.data)) {
+                    const formattedCities = response.data.data.map(city => ({
+                        name: city.name, 
+                        id: city.id
+                    }));
+                    setCities(formattedCities);
+                } else {
+                    console.error('API error:', response.data.error_text);
+                }
             })
             .catch((error) => {
                 console.error('Error fetching cities:', error);
@@ -41,14 +63,15 @@ export default function YearComponent() {
                     className="w-full md:w-10rem"
                 />
                 <b className='m-5'>Năm</b>
-                <InputMask
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    mask="2024"
-                    placeholder="2024"
-                    className="w-full md:w-5rem mr-5"
+                <InputMask 
+                    value={year} 
+                    onChange={handleChange}
+                    mask="9999" 
+                    placeholder="yyyy" 
+                    slotChar="yyyy" 
+                    className="w-full md:w-5rem mr-5 text-center"
                 />
-                <Button label="Tìm kiếm" className="surface-50 text-color" />
+                <Button label="Tìm kiếm" className="surface-50 text-color" onClick={handleSearch} />
             </div>
         </form>
     );

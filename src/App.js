@@ -1,22 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './views/Home';
-import Report from './views/Report';
+import Report from './views/Report'; // Ensure this is an array of routes
 import ReportComponent from './components/ReportComponent/title';
-import '/node_modules/primeflex/primeflex.css'
+import '/node_modules/primeflex/primeflex.css';
+
 function App() {
     return (
-      <Router>
-      <div>
-        <Navbar /> {/* Add Navbar component */}
-        <Routes>
-          <Route path="/" element={<Home />} /> {/* Home route */}
-          {Report.map((route, index) => (
-            <Route key={index} path={route.path} element={<ReportComponent label = {route.label}><route.component /></ReportComponent>} />
-          ))}
-        </Routes>
-      </div>
-    </Router>
+        <Router>
+            <div>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    {Report.map((route, index) => (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={
+                                <ReportComponent label={route.label}>
+                                    <route.component />
+                                </ReportComponent>
+                            }
+                        />
+                    ))}
+                </Routes>
+            </div>
+        </Router>
     );
 }
 

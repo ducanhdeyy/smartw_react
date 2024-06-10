@@ -15,11 +15,22 @@ export default function DayComponent() {
 
     //get api axios
     useEffect(() => {
-        // Fetch cities data from the API
-        axios
-            .get('')
+        const apiUrl = 'https://esgoo.net/api-tinhthanh/1/0.htm';
+
+        axios.get(apiUrl)
             .then((response) => {
-                setCities(response.data);
+                console.log('API response:', response.data);
+
+                // Kiểm tra phản hồi từ API và đặt dữ liệu vào state
+                if (response.data.error === 0 && Array.isArray(response.data.data)) {
+                    const formattedCities = response.data.data.map(city => ({
+                        name: city.name, 
+                        id: city.id
+                    }));
+                    setCities(formattedCities);
+                } else {
+                    console.error('API error:', response.data.error_text);
+                }
             })
             .catch((error) => {
                 console.error('Error fetching cities:', error);

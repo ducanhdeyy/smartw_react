@@ -16,14 +16,25 @@ export default function DateRangeComponent() {
 
     //get api axios
     useEffect(() => {
-        // Lấy dữ liệu thành phố từ API
-        axios
-            .get('')
+        const apiUrl = 'https://esgoo.net/api-tinhthanh/1/0.htm';
+
+        axios.get(apiUrl)
             .then((response) => {
-                setCities(response.data);
+                console.log('API response:', response.data);
+
+                // Kiểm tra phản hồi từ API và đặt dữ liệu vào state
+                if (response.data.error === 0 && Array.isArray(response.data.data)) {
+                    const formattedCities = response.data.data.map(city => ({
+                        name: city.name, 
+                        id: city.id
+                    }));
+                    setCities(formattedCities);
+                } else {
+                    console.error('API error:', response.data.error_text);
+                }
             })
             .catch((error) => {
-                console.error('Lỗi khi lấy dữ liệu thành phố:', error);
+                console.error('Error fetching cities:', error);
             });
     }, []);
 
@@ -37,7 +48,7 @@ export default function DateRangeComponent() {
                     options={cities}
                     optionLabel="name"
                     editable
-                    placeholder="Chọn thành phố"
+                    placeholder="Select a City"
                     className="w-full md:w-10rem"
                 />
                 <b className='m-4'>Từ ngày</b>
