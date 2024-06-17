@@ -50,16 +50,16 @@ export default function DayComponent() {
                     placeholder="Select a City"
                     className="w-full md:w-10rem"
                 />
-                <b className='m-4'>Ngày</b>
-                <InputMask 
+                <b className='xl:m-4'>Ngày</b>
+                <InputMask type='text'
                     value={startDate} 
                     onChange={(e) => setStartDate(e.target.value)} 
                     mask="99/99/9999" 
                     placeholder="dd/mm/yyyy" 
                     slotChar="dd/mm/yyyy" 
-                    className="w-full md:w-10rem mr-4"
+                    className="w-full md:w-10rem mr-4 text-center"
                 />
-                <Button label="Tìm kiếm" className="surface-50 text-color" />
+                <Button label="Tìm kiếm" className="surface-50 text-color sm: mt-3" />
             </div>
         </form>
     );

@@ -17,40 +17,22 @@ const items = [
 ];
 
 const ReportComponent = ({ label }) => {
-  const [activeItem, setActiveItem] = useState(items[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleTabChange = (e) => {
-    console.log("Tab clicked:", e.value); // Log the selected tab label
-    setActiveItem(e.value);
+    setActiveIndex(e.index);
   };
 
-  const renderComponent = () => {
-    const ActiveComponent = activeItem.component;
-    switch (activeItem.label) {
-      case 'Năm':
-        return <YearComponent />;
-      case 'Quý':
-        return <QuarterComponent />;
-      case 'Tháng':
-        return <MonthComponent />;
-      case 'Tuần':
-        return <WeekComponent />;
-      case 'Ngày':
-        return <DayComponent />;
-      case 'Ngày đến ngày':
-        return <DateRangeComponent />;
-      default:
-        return null; // Render nothing if no component is matched
-    }
-  };
+  const ActiveComponent = items[activeIndex].component;
+  const activeLabel = items[activeIndex].label;
 
   return (
     <div>
       <h3 className="pl-4">BÁO CÁO VẬN HÀNH KHAI THÁC THEO {label}</h3>
       <div className="card pl-3">
-        <TabMenu model={items} activeItem={activeItem} onTabChange={handleTabChange} />
+        <TabMenu model={items.map(item => ({ label: item.label }))} activeIndex={activeIndex} onTabChange={handleTabChange} />
       </div>
-      {renderComponent()}
+      <ActiveComponent activeLabel={activeLabel} />
     </div>
   );
 };

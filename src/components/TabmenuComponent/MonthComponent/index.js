@@ -51,7 +51,7 @@ export default function MonthComponent() {
                     placeholder="Select a City"
                     className="w-full md:w-10rem"
                 />
-                <b className='m-5'>Năm</b>
+                <b className='xl:m-5'>Năm</b>
                 <InputMask className='w-full md:w-5rem text-center'
                     value={startDate} 
                     onChange={(e) => setStartDate(e.target.value)} 
@@ -59,7 +59,7 @@ export default function MonthComponent() {
                     placeholder="yyyy" 
                     slotChar="yyyy"
                 />
-                <b className='m-4'>Tháng</b>
+                <b className='xl:m-4'>Tháng</b>
                 <InputMask 
                     className='mr-4 w-full md:w-5rem text-center' 
                     value={endDate} 
@@ -68,7 +68,7 @@ export default function MonthComponent() {
                     placeholder="mm" 
                     slotChar="mm"
                 />
-                <Button label="Tìm kiếm" className="surface-50 text-color" />
+                <Button label="Tìm kiếm" className="sm: mt-3 surface-50 text-color" />
             </div>
         </form>
     );

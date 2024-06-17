@@ -52,7 +52,8 @@ export default function DateRangeComponent() {
                     className="w-full md:w-10rem"
                 />
                 <b className='m-4'>Từ ngày</b>
-                <InputMask 
+                <InputMask className='text-center'
+                    type='text'
                     value={startDate} 
                     onChange={(e) => setStartDate(e.target.value)} 
                     mask="99/99/9999" 
@@ -61,7 +62,8 @@ export default function DateRangeComponent() {
                 />
                 <b className='m-4'>Đến ngày</b>
                 <InputMask 
-                    className='mr-4' 
+                    className='mr-4 text-center' 
+                    type='text'
                     value={endDate} 
                     onChange={(e) => setEndDate(e.target.value)} 
                     mask="99/99/9999" 

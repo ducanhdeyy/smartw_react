@@ -51,6 +51,7 @@ const Navbar = () => {
                         {
                             label: 'CELL OFF',
                             id: 'menu-items',
+                            command: () => navigate('/station/cell_of'),
                         },
                         {
                             label: 'TRẠM MFĐ',

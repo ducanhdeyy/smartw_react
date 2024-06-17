@@ -51,7 +51,7 @@ export default function WeekComponent() {
                     placeholder="Select a City"
                     className="w-full md:w-10rem"
                 />
-                <b className='m-5'>Năm</b>
+                <b className='xl:m-5'>Năm</b>
                 <InputMask className='w-full md:w-4rem text-center'
                     value={startDate} 
                     onChange={(e) => setStartDate(e.target.value)} 
@@ -59,16 +59,16 @@ export default function WeekComponent() {
                     placeholder="yyyy" 
                     slotChar="yyyy"
                 />
-                <b className='m-4'>Tuần</b>
+                <b className='xl:m-4'>Tuần</b>
                 <InputMask 
                     className='mr-4 w-full md:w-4rem text-center' 
                     value={endDate} 
                     onChange={(e) => setEndDate(e.target.value)} 
-                    mask="9999" 
-                    placeholder="yyyy" 
-                    slotChar="yyyy"
+                    mask="99" 
+                    placeholder="dd" 
+                    slotChar="dd"
                 />
-                <Button label="Tìm kiếm" className="surface-50 text-color" />
+                <Button label="Tìm kiếm" className="surface-50 text-color sm: mt-3" />
             </div>
         </form>
     );
